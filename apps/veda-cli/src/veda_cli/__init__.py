@@ -1,0 +1,1 @@
+"""veda-cli package."""

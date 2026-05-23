@@ -1,0 +1,58 @@
+[project]
+name = "veda-workspace"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+  "veda-server",
+  "veda-cli",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.11.0",
+]
+
+[tool.uv.sources]
+veda-server = { workspace = true }
+veda-cli = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+  "apps/veda-server",
+  "apps/veda-cli",
+  "libs/veda-core",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+src = ["apps", "libs"]
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra"
+testpaths = [
+  "apps",
+  "libs",
+]
+pythonpath = [
+  "apps/veda-server/src",
+  "apps/veda-cli/src",
+  "libs/veda-core/src",
+]

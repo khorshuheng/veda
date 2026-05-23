@@ -1,0 +1,19 @@
+[project]
+name = "veda-server"
+version = "0.1.0"
+description = "Veda server application"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "veda-core",
+]
+
+[project.scripts]
+veda-server = "veda_server.main:main"
+
+[tool.uv.sources]
+veda-core = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
