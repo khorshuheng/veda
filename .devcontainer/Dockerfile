@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/devcontainers/python:1-3.13-bookworm
+FROM mcr.microsoft.com/devcontainers/python:3.13-bookworm
 
 # Install Git LFS for repositories that enforce LFS hooks.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git-lfs \
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends git-lfs \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv globally for dependency and environment management.
