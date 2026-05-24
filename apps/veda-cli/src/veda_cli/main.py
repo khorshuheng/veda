@@ -1,18 +1,23 @@
-import argparse
+import click
 
-from veda_core import get_version
+from veda_cli.commands import CommandInvoker, ReadyCommand, VersionCommand
+
+
+@click.command(context_settings={"help_option_names": ["-h", "--help"]})
+@click.option("--version", "show_version", is_flag=True, help="Show version information")
+def cli(show_version: bool) -> None:
+    invoker = CommandInvoker(
+        command_map={
+            "version": VersionCommand(),
+        },
+        default_command=ReadyCommand(),
+    )
+    selected_command = invoker.resolve(show_version=show_version)
+    click.echo(selected_command.execute())
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="veda")
-    parser.add_argument("--version", action="store_true", help="Show version information")
-    args = parser.parse_args()
-
-    if args.version:
-        print(f"veda-cli 0.1.0 (core {get_version()})")
-        return
-
-    print("veda-cli ready")
+    cli(standalone_mode=True)
 
 
 if __name__ == "__main__":

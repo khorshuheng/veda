@@ -5,6 +5,7 @@ description = "Veda command-line interface"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+  "click>=8.1",
   "veda-core",
 ]
 

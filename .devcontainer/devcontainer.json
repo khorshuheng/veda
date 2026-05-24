@@ -17,5 +17,7 @@
       ]
     }
   },
-  "postCreateCommand": "uv --version && python --version"
+  "forwardPorts": [22],
+  "postCreateCommand": "uv --version && python --version && uv sync --all-packages",
+  "postStartCommand": "sudo service ssh start && bash .devcontainer/watch-uv-sync.sh /workspaces/veda >> /tmp/veda-uv-sync-watcher.log 2>&1 &"
 }

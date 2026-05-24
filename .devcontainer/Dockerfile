@@ -2,8 +2,11 @@ FROM mcr.microsoft.com/devcontainers/python:3.13-bookworm
 
 # Install Git LFS for repositories that enforce LFS hooks.
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends git-lfs \
+RUN apt-get install -y --no-install-recommends git-lfs inotify-tools openssh-server \
     && rm -rf /var/lib/apt/lists/*
+
+# Prepare OpenSSH runtime directory.
+RUN mkdir -p /var/run/sshd
 
 # Install uv globally for dependency and environment management.
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
